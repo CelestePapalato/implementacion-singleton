@@ -47,6 +47,6 @@ public class SoundManager : MonoBehaviour
         {
             return;
         }
-        //AudioSource.PlayClipAtPoint(toPlay, position);
+        AudioSource.PlayClipAtPoint(toPlay, position);
     }
 }
