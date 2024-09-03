@@ -13,6 +13,8 @@ public class SoundManager : MonoBehaviour
 
     Dictionary<string, AudioClip> DiccionarioAudio = new Dictionary<string, AudioClip>();
 
+    AudioSource audioSource;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,6 +29,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         for (int i = 0; i < sounds.Count; i++) {
             DiccionarioAudio.Add(sounds[i], audioClipList[i]);
         }
@@ -37,16 +41,18 @@ public class SoundManager : MonoBehaviour
 
     public void Play(string audioClip)
     {
-        Play(audioClip, transform.position);
-    }
-
-    public void Play(string audioClip, Vector3 position)
-    {
         AudioClip toPlay;
         if (!DiccionarioAudio.TryGetValue(audioClip, out toPlay))
         {
             return;
         }
-        AudioSource.PlayClipAtPoint(toPlay, position);
+        audioSource.Stop();
+        audioSource.clip = toPlay;
+        audioSource.Play();
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
     }
 }
