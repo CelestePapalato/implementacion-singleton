@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(scoreTimer);
             puntaje++;
+            if(puntaje % 100 == 0)
+            {
+                SoundManager.Instance.PlaySE("puntaje");
+            }
             UpdateScore();
         }
     }
