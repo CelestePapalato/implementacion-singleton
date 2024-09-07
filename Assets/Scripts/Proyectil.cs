@@ -8,16 +8,19 @@ public class Projectil : MonoBehaviour
 
     [SerializeField]
     float timeAlive = 5f;
+    [SerializeField]
+    float rapidez = 1f;
 
-    public float Rapidez { get => Rapidez; set { Rapidez = (value > 0) ? value : Rapidez; } }
-
-    Rigidbody2D rb;
+    public float Rapidez { get => rapidez; set { rapidez = (value > 0) ? value : rapidez; } }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Rapidez * Direccion;
         Destroy(gameObject, timeAlive);
+    }
+
+    private void Update()
+    {
+        transform.Translate(Direccion * rapidez * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

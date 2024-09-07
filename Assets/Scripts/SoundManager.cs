@@ -44,7 +44,7 @@ public class SoundManager : MonoBehaviour
         SEAudioSource.Play();
     }
 
-    public void PlayBGM(string audioClip)
+    public void PlayBGM(string audioClip, bool loop)
     {
         if (!BGMAudioList || !BGMAudioSource) { return; }
 
@@ -55,6 +55,7 @@ public class SoundManager : MonoBehaviour
         }
         BGMAudioSource.Stop();
         BGMAudioSource.clip = toPlay;
+        BGMAudioSource.loop = loop;
         BGMAudioSource.Play();
     }
 

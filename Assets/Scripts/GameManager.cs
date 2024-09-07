@@ -20,11 +20,16 @@ public class GameManager : MonoBehaviour
         PlayerController.onDead -= GameOver;
     }
 
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM("gameplay", true);
+    }
+
     private void GameOver()
     {
         Debug.Log("Game Over");
         Time.timeScale = 0;
-        SoundManager.Instance.BGMStop();
+        SoundManager.Instance.PlayBGM("game over", false);
         SoundManager.Instance.PlaySE("game over");
     }
 }

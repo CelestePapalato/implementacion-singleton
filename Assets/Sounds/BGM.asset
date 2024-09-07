@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cdf07f09cb9644c9360e1a56a170fa, type: 3}
   m_Name: BGM
   m_EditorClassIdentifier: 
-  audio: []
+  audio:
+  - name: gameplay
+    audioClip: {fileID: 8300000, guid: d35101a03f001ed42994f4fcfb3cb94d, type: 3}
+  - name: game over
+    audioClip: {fileID: 8300000, guid: e370483a2a017bf4688a59b7598f655e, type: 3}
