@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,16 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
+    [Header("Audio Source")]
     [SerializeField]
-    List<string> sounds = new List<string>();
+    AudioSource SEAudioSource;
     [SerializeField]
-    List<AudioClip> audioClipList = new List<AudioClip>();
+    AudioSource BGMAudioSource;
 
-    Dictionary<string, AudioClip> DiccionarioAudio = new Dictionary<string, AudioClip>();
-
-    AudioSource audioSource;
+    [SerializeField]
+    AudioList SEAudioList;
+    [SerializeField]
+    AudioList BGMAudioList;
 
     private void Awake()
     {
@@ -27,32 +30,41 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void PlaySE(string audioClip)
     {
-        audioSource = GetComponent<AudioSource>();
+        if(!SEAudioList || !SEAudioSource) { return; }
 
-        for (int i = 0; i < sounds.Count; i++) {
-            DiccionarioAudio.Add(sounds[i], audioClipList[i]);
-        }
-
-        sounds.Clear();
-        audioClipList.Clear();
-    }
-
-    public void Play(string audioClip)
-    {
         AudioClip toPlay;
-        if (!DiccionarioAudio.TryGetValue(audioClip, out toPlay))
+        if (!SEAudioList.TryGetAudio(audioClip, out toPlay))
         {
             return;
         }
-        audioSource.Stop();
-        audioSource.clip = toPlay;
-        audioSource.Play();
+        SEAudioSource.Stop();
+        SEAudioSource.clip = toPlay;
+        SEAudioSource.Play();
     }
 
-    public void Stop()
+    public void PlayBGM(string audioClip)
     {
-        audioSource.Stop();
+        if (!BGMAudioList || !BGMAudioSource) { return; }
+
+        AudioClip toPlay;
+        if (!BGMAudioList.TryGetAudio(audioClip, out toPlay))
+        {
+            return;
+        }
+        BGMAudioSource.Stop();
+        BGMAudioSource.clip = toPlay;
+        BGMAudioSource.Play();
+    }
+
+    public void SEStop()
+    {
+        SEAudioSource.Stop();
+    }
+
+    public void BGMStop()
+    {
+        BGMAudioSource.Stop();
     }
 }

@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if(!proyectil || !canShoot) { return; }
         Instantiate(proyectil, transform.position, Quaternion.identity);
         Debug.Log("pium");
-        SoundManager.Instance.Play("disparo");
+        SoundManager.Instance.PlaySE("disparo");
         StartCoroutine(Cooldown());
     }
 

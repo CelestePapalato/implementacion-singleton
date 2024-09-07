@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         Time.timeScale = 0;
-        SoundManager.Instance.Play("game over");
+        SoundManager.Instance.BGMStop();
+        SoundManager.Instance.PlaySE("game over");
     }
 }
