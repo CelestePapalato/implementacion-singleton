@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         onDead?.Invoke();
     }
